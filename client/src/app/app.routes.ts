@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { WODFormComponent } from './wod-form/wod-form.component';
-import { AppComponent } from './app.component';
+import { HomeComponent } from './app.component';
 
 const routeConfig: Routes = [
     {
         path: '',
-        component: AppComponent,
+        component: HomeComponent,
         title: 'Home page',
     },
     {
