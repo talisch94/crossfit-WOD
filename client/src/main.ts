@@ -1,6 +1,14 @@
-import { bootstrapApplication } from '@angular/platform-browser';
+import { bootstrapApplication, provideProtractorTestingSupport } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { RootComponent } from './app/root.component';
+import { provideRouter } from '@angular/router';
+import routeConfig from './app/app.routes';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(RootComponent, {
+    ...appConfig,
+    providers: [
+        ...(appConfig.providers || []),
+        provideRouter(routeConfig),
+        provideProtractorTestingSupport()
+    ]
+});
