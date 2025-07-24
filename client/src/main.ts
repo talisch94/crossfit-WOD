@@ -1,10 +1,10 @@
 import { bootstrapApplication, provideProtractorTestingSupport } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
-import { RootComponent } from './app/root.component';
 import { provideRouter } from '@angular/router';
-import routeConfig from './app/app.routes';
+import routeConfig from './app/routes';
+import { AppComponent } from './app/app.component';
 
-bootstrapApplication(RootComponent, {
+bootstrapApplication(AppComponent, {
     ...appConfig,
     providers: [
         ...(appConfig.providers || []),
