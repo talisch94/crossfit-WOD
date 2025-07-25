@@ -1,0 +1,26 @@
+<div>
+    <h2 class="text-xl font-bold mb-4">WOD List</h2>
+
+    @if (isLoading()) {
+        <div>
+            Loading.....
+        </div>
+    }
+
+    @else if(wods().length === 0) {
+    <div>
+        No WODs found.
+    </div>
+    }
+    @else {
+    <ul>
+        @for (wod of wods(); track wod.id) {
+        <li class="mb-2 border p-2 rounded shadow">
+            <strong>{{ wod.name }}</strong> <br />
+            Type: {{ wod.type }}
+            Time Cap: {{ wod.timeCap }} mins <br />
+        </li>
+        }
+    </ul>
+    }
+</div>

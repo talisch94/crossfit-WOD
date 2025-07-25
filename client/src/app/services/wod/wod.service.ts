@@ -17,4 +17,8 @@ export class WodService {
         const wod: Partial<Wod> = {name, type};
         return this.http.post<Wod>(this.apiUrl, wod);
     }
+
+    getWods(): Observable<Wod[]> {
+        return this.http.get<Wod[]>(this.apiUrl);
+    }
 }
