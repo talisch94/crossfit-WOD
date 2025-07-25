@@ -15,8 +15,8 @@ export class WodController {
     }
 
     @Get()
-    findAll() {
-        return this.wodService.findAll();
+    getAll() {
+        return this.wodService.getAll();
     }
 
     @Get(':id')

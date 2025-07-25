@@ -18,7 +18,7 @@ export class WodService {
         return this.wodRepository.save(wod);
     }
 
-    findAll() {
+    async getAll(): Promise<Wod[]> {
         return this.wodRepository.find();
     }
 
