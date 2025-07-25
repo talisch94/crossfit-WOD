@@ -1,0 +1,14 @@
+<p>wod-form works!</p>
+
+<form [formGroup]="form" (submit)="saveWOD()">
+    <label for="name">Name</label>
+    <input id="name" type="text" formControlName="name">
+
+    <label for="type">Type</label>
+    <input id="type" type="text" formControlName="type">
+
+    <!-- <label for="isDone">Is Done</label>
+    <input id="isDone" type="boolean" formControlName="name"> -->
+
+    <button type="submit" class="primary"> Save </button>
+</form>
