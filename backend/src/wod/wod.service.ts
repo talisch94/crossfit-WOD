@@ -33,7 +33,9 @@ export class WodService {
 
     async remove(id: string) {
         const wod = await this.findOne(id);
-        // return this.wodRepository.remove(wod);
+        if (wod) {
+            return this.wodRepository.remove(wod);
+        }
     }
 
 }

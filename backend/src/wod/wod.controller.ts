@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { WodService } from './wod.service';
 import { CreateWodDto } from './dto/create-wod.dto';
 import { UpdateWodDto } from './dto/update-wod.dto';
@@ -10,7 +10,6 @@ export class WodController {
 
     @Post()
     create(@Body() createWodDto: CreateWodDto) {
-        console.log('arrived to back!!');
         return this.wodService.create(createWodDto);
     }
 
@@ -24,7 +23,7 @@ export class WodController {
         return this.wodService.findOne(id);
     }
 
-    @Patch(':id')
+    @Put(':id')
     update(@Param('id') id: string, @Body() updateWodDto: UpdateWodDto) {
         this.wodService.update(id, updateWodDto);
     }
