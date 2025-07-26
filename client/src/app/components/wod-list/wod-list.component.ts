@@ -1,7 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 import { Wod } from '../../interfaces/wod.interface';
 import { WodService } from '../../services/wod/wod.service';
-import { delay } from 'rxjs';
 
 @Component({
     standalone: true,
@@ -14,7 +15,7 @@ export class WODListComponent implements OnInit {
     wods = signal<Wod[]>([]);
     isLoading = signal(true);
 
-    constructor(private wodService: WodService) { }
+    constructor(private wodService: WodService, private router: Router) { }
 
     ngOnInit(): void {
         this.loadWODs();
@@ -25,7 +26,6 @@ export class WODListComponent implements OnInit {
             .pipe(delay(2000))
             .subscribe({
                 next: (data) => {
-                    console.log('endedd');
                     this.isLoading.set(false);
                     this.wods.set(data);
                 },
@@ -36,16 +36,8 @@ export class WODListComponent implements OnInit {
             });
     }
     
-    onEdit(wod: Wod) {
-        console.log('editinggggg ', wod.id);
-        this.wodService.editWod(wod.id, wod).subscribe({
-            next: (updatedWod) => {
-                console.log('Item updated successfully', updatedWod);
-            },
-            error: (err) => {
-                console.error('Error updating wod: ', err);
-            }
-        })  
+    onEdit(wodId: string) {
+        this.router.navigate([`wods/${wodId}`]); 
     }
 
     onDelete(wodId: string) {

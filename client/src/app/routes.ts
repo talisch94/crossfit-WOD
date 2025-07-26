@@ -10,12 +10,17 @@ const routeConfig: Routes = [
         title: 'Home Page',
     },
     {
-        path: 'wod-form',
+        path: 'wod',
         component: WODFormComponent,
         title: 'WOD Form Page',
     },
     {
-        path: 'wods',
+        path: 'wod/:id',
+        component: WODFormComponent,
+        title: 'WOD Form Page',
+    },
+    {
+        path: 'wod-list',
         component: WODListComponent,
         title: 'WOD List Page',
     }
