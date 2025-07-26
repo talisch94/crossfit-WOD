@@ -21,4 +21,12 @@ export class WodService {
     getWods(): Observable<Wod[]> {
         return this.http.get<Wod[]>(this.apiUrl);
     }
+
+    editWod(wodId: string, wod: Wod): Observable<Wod> {
+        return this.http.put<Wod>(`${this.apiUrl}/${wodId}`, wod);
+    }
+
+    deleteWod(wodId: string): Observable<any> {
+        return this.http.delete(`${this.apiUrl}/${wodId}`);
+    }
 }
