@@ -37,7 +37,7 @@ export class WODListComponent implements OnInit {
     }
     
     onEdit(wodId: string) {
-        this.router.navigate([`wods/${wodId}`]); 
+        this.router.navigate([`wod/${wodId}`]); 
     }
 
     onDelete(wodId: string) {
