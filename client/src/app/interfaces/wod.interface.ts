@@ -1,5 +1,5 @@
 export interface Wod {
-    id: number;
+    id: string;
     name: string;
     type: string;
     timeCap?: number;
