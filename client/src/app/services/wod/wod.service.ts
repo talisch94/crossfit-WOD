@@ -8,22 +8,24 @@ import { Observable } from 'rxjs';
 })
 export class WodService {
 
-    private apiUrl = 'http://localhost:3000/wods';
+    private apiUrl = '/api/wods';
 
     constructor(private http: HttpClient) { }
 
-    submitWod(name: string, type: string): Observable<Wod> {
-        console.log('saved! ' + name + ', ' + type);
-        const wod: Partial<Wod> = {name, type};
+    createWod(wod: Partial<Wod>): Observable<Wod> {
         return this.http.post<Wod>(this.apiUrl, wod);
+    }
+
+    updateWod(id: string, data: Wod) {
+        return this.http.put(`${this.apiUrl}/${id}`, data);
     }
 
     getWods(): Observable<Wod[]> {
         return this.http.get<Wod[]>(this.apiUrl);
     }
 
-    editWod(wodId: string, wod: Wod): Observable<Wod> {
-        return this.http.put<Wod>(`${this.apiUrl}/${wodId}`, wod);
+    getWodById(id: string) {
+        return this.http.get(`${this.apiUrl}/${id}`);
     }
 
     deleteWod(wodId: string): Observable<any> {
