@@ -12,27 +12,49 @@ import { delay } from 'rxjs';
 })
 export class WODListComponent implements OnInit {
     wods = signal<Wod[]>([]);
-    isLoading = signal(false);
+    isLoading = signal(true);
 
     constructor(private wodService: WodService) { }
 
     ngOnInit(): void {
-        this.isLoading.set(true);
         this.loadWODs();
     }
 
     loadWODs() {
         this.wodService.getWods()
-        .pipe(delay(2000))
-        .subscribe({
-            next: (data) => {
-                this.wods.set(data);
-                this.isLoading.set(false);
+            .pipe(delay(2000))
+            .subscribe({
+                next: (data) => {
+                    console.log('endedd');
+                    this.isLoading.set(false);
+                    this.wods.set(data);
+                },
+                error: (err) => {
+                    this.isLoading.set(false);
+                    console.error('Error loading WODs:', err);
+                }
+            });
+    }
+    
+    onEdit(wod: Wod) {
+        console.log('editinggggg ', wod.id);
+        this.wodService.editWod(wod.id, wod).subscribe({
+            next: (updatedWod) => {
+                console.log('Item updated successfully', updatedWod);
             },
             error: (err) => {
-                console.error('Error loading WODs:', err);
-                this.isLoading.set(false);
+                console.error('Error updating wod: ', err);
             }
-        });
+        })  
     }
+
+    onDelete(wodId: string) {
+        this.wodService.deleteWod(wodId).subscribe({
+            next: (deletedWod) => {
+                console.log('Item deleted successfully', deletedWod);
+            },
+            error: (err) => {
+                console.error('Error updating wod: ', err);
+            }
+        })      }
 }
