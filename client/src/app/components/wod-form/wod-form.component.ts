@@ -26,6 +26,7 @@ export class WODFormComponent {
         ).subscribe({
             next: (res) => {
                 console.log('WOD savedddd: ', res);
+                this.form.setValue({ name: '', type: '' });
             },
             error: (err) => {
                 console.error('Error saving wod: ', err)
