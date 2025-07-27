@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { WodModule } from './wod/wod.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { WodModule } from './wod/wod.module';
 import { dataSourceOptions } from './data-source';
+import { ExerciseModule } from './exercise/exercise.module';
 
 @Module({
     imports: [
@@ -10,7 +11,8 @@ import { dataSourceOptions } from './data-source';
             isGlobal: true,
         }),
         TypeOrmModule.forRoot(dataSourceOptions),
-        WodModule
+        WodModule,
+        ExerciseModule
     ],
 })
 export class AppModule { }
