@@ -10,7 +10,7 @@ const routeConfig: Routes = [
         title: 'Home Page',
     },
     {
-        path: 'wod',
+        path: 'new-wod',
         component: WODFormComponent,
         title: 'WOD Form Page',
     },

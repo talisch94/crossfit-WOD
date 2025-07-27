@@ -15,7 +15,7 @@ export class AdminPageComponent {
     private router = inject(Router);
     
     createNew() {
-        this.router.navigate(['/wod']);
+        this.router.navigate(['/new-wod']);
     }
 
 }
