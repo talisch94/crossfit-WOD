@@ -17,10 +17,30 @@
 
             <!-- Main Button -->
             <div class="hidden md:block">
-                <button class="bg-white text-purple-700 hover:bg-indigo-700 px-4 py-2 rounded-md font-semibold text-sm"
-                    routerLink="/wod"> Log in
+                <button routerLink="/wod"
+                    class="bg-white text-purple-700 hover:bg-indigo-700 px-4 py-2 rounded-md font-semibold text-sm"> Log
+                    in
                 </button>
             </div>
         </div>
     </div>
 </nav>
+
+<!-- תפריט מלמעלה למובייל -->
+<!-- <div class="md:hidden">
+                <button (click)="toggleMobile()" class="text-gray-200 hover:text-white">
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>-->
+
+<!-- תפריט במקרה של מובייל -->
+<!-- <div *ngIf="mobileOpen" class="md:hidden bg-gray-800">
+        <a routerLink="/product" class="block px-4 py-2 hover:bg-gray-700">Product</a>
+        <a routerLink="/solutions" class="block px-4 py-2 hover:bg-gray-700">Solutions</a>
+        <a routerLink="/pricing" class="block px-4 py-2 hover:bg-gray-700">Pricing</a>
+        <a routerLink="/resources" class="block px-4 py-2 hover:bg-gray-700">Resources</a>
+        <a routerLink="/login" class="block px-4 py-2 hover:bg-gray-700">Log in</a>
+        <button class="w-full text-left px-4 py-2 bg-indigo-600 hover:bg-indigo-700">Get started</button>
+    </div> -->
