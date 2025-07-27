@@ -24,8 +24,9 @@ export class WodController {
     }
 
     @Put(':id')
-    update(@Param('id') id: string, @Body() updateWodDto: UpdateWodDto) {
-        this.wodService.update(id, updateWodDto);
+    async update(@Param('id') id: string, @Body() updateWodDto: UpdateWodDto) {
+        await this.wodService.update(id, updateWodDto);
+        return this.wodService.findOne(id);
     }
 
     @Delete(':id')

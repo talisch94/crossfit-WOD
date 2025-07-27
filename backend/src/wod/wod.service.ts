@@ -27,8 +27,7 @@ export class WodService {
     }
 
     async update(id: string, updateWodDto: UpdateWodDto) {
-        await this.wodRepository.update(id, updateWodDto);
-        return this.findOne(id);
+        return this.wodRepository.update(id, updateWodDto);
     }
 
     async remove(id: string) {
