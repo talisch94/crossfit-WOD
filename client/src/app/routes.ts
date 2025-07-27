@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { WODFormComponent } from './components/wod-form/wod-form.component';
-import { WODListComponent } from './components/wod-list/wod-list.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 const routeConfig: Routes = [
     {
@@ -20,8 +20,8 @@ const routeConfig: Routes = [
         title: 'WOD Form Page',
     },
     {
-        path: 'wod-list',
-        component: WODListComponent,
+        path: 'admin',
+        component: AdminPageComponent,
         title: 'WOD List Page',
     }
 ];
