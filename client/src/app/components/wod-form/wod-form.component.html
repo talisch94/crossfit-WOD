@@ -18,6 +18,17 @@
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
         </div>
 
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Choose an exercise ..</mat-label>
+            <mat-select formControlName="exerciseId">
+                @for (exercise of exercises(); track exercise.id) {
+                <mat-option [value]="exercise.id">
+                    {{ exercise.name }}
+                </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
         <!-- boolean example
         <div class="flex items-center space-x-2">
             <input id="isDone" type="checkbox" formControlName="isDone"
@@ -25,6 +36,11 @@
             <label for="isDone" class="text-sm text-gray-700">Is Done</label>
         </div>
         -->
+
+        <!-- <mat-form-field appearance="fill">
+            <mat-label>שם</mat-label>
+            <input matInput placeholder="הכנס שם">
+        </mat-form-field> -->
 
         <button type="submit"
             class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">

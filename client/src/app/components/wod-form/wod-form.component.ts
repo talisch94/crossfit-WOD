@@ -1,19 +1,24 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { WodService } from '../../services/wod/wod.service';
+import { WodService } from '../../services/wods.service';
 import { Wod } from '../../interfaces/wod.interface';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Exercise } from '../../interfaces/exercise.interface';
+import { ExercisesService } from '../../services/exercises.service';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
     standalone: true,
     selector: 'app-wod-form',
-    imports: [ReactiveFormsModule, CommonModule],
+    imports: [ReactiveFormsModule, CommonModule, MatSelectModule],
     templateUrl: './wod-form.component.html',
     styleUrl: './wod-form.component.scss'
 })
 export class WODFormComponent implements OnInit {
     private wodService = inject(WodService);
+    private exercisesService = inject(ExercisesService);
+
     private route = inject(ActivatedRoute);
     private router = inject(Router);
 
@@ -21,13 +26,20 @@ export class WODFormComponent implements OnInit {
     isEditMode = computed(() => !!this.wodId());
     wod = signal<Wod | null>(null);
 
+    exercises = signal<Exercise[] | null>(null);
+
     form = new FormGroup({
         name: new FormControl(''),
         type: new FormControl(''),
+        exerciseId: new FormControl(null, Validators.required)
         // isDone: new FormControl(false),
     });
 
     ngOnInit(): void {
+        this.exercisesService.getExercises().subscribe(exercises => {
+            this.exercises.set(exercises);
+        });
+
         const id = this.route.snapshot.paramMap.get('id');
         if (id) {
             this.wodId.set(id);
@@ -38,6 +50,7 @@ export class WODFormComponent implements OnInit {
     private loadWod(id: string) {
         this.wodService.getWodById(id).subscribe({
             next: (data) => {
+                console.log(data);
                 this.wod.set(data as Wod);
                 this.form.patchValue(data);
             },
@@ -57,8 +70,8 @@ export class WODFormComponent implements OnInit {
             this.wodService.updateWod(this.wodId()!, wod).subscribe({
                 next: (res) => {
                     console.log('WOD updated successfully: ', res);
-                    this.form.setValue({ name: '', type: '' });
-                    this.router.navigate(['/wod-list']);
+                    this.form.setValue({ name: '', type: '', exerciseId: null });
+                    this.router.navigate(['/admin']);
                 },
                 error: (err) => {
                     console.error('Error saving wod: ', err)
@@ -68,7 +81,7 @@ export class WODFormComponent implements OnInit {
             this.wodService.createWod(wod).subscribe({
                 next: (res) => {
                     console.log('WOD created successfully: ', res);
-                    this.router.navigate(['/wod-list']);
+                    this.router.navigate(['/admin']);
                 },
                 error: (err) => {
                     console.error('Error saving wod: ', err)
