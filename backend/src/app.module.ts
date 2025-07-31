@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
+import { WodModule } from './wod/wod.module';
+import { dataSourceOptions } from './data-source';
+import { ExerciseModule } from './exercise/exercise.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+        }),
+        TypeOrmModule.forRoot(dataSourceOptions),
+        WodModule,
+        ExerciseModule
+    ],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,0 +1,46 @@
+<div>
+    <h2 class="text-2xl font-bold m-4 underline">WOD List</h2>
+
+    @if (isLoading()) {
+    <div>
+        Loading.....
+    </div>
+    } @else {
+    @if(wods().length === 0) {
+    <div>
+        No WODs found.
+    </div>
+    }
+    @else {
+    <ul>
+        @for (wod of wods(); track wod.id) {
+        <li class="m-4 border p-2 rounded shadow flex justify-between items-center">
+            <div>
+                <strong>{{ wod.name }}</strong> <br />
+                Type: {{ wod.type }}
+                Time Cap: {{ wod.timeCap }} mins <br />
+            </div>
+            <div class="flex items-center gap-1">
+                <button type="button" class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
+                    (click)="onEdit(wod.id)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.862 4.487a2.1 2.1 0 013.023 2.923l-9.14 9.14a4.2 4.2 0 01-1.768 1.054l-3.122.947.947-3.122a4.2 4.2 0 011.054-1.768l9.14-9.14z" />
+                    </svg>
+                </button>
+                <button type="button" class="text-red-600 hover:text-red-800 transition" (click)="onDelete(wod.id)"
+                    aria-label="Delete">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+
+                </button>
+            </div>
+        </li>
+        }
+    </ul>
+    }
+    }
+</div>

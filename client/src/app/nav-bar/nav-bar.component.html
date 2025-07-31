@@ -1,0 +1,46 @@
+<nav class="bg-purple-500 mb-4 text-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <!-- Logo -->
+            <div class="flex-shrink-0">
+                <a routerLink="/" class="text-2xl font-extrabold">Your WOD App</a>
+            </div>
+
+            <!-- Nav Links -->
+            <div class="hidden md:flex space-x-8">
+                <a routerLink="/product" class="hover:text-gray-300 cursor-pointer">Product</a>
+                <a routerLink="/solutions" class="hover:text-gray-300 cursor-pointer">Photos</a>
+                <a routerLink="/pricing" class="hover:text-gray-300 cursor-pointer">Pricing</a>
+                <a routerLink="/resources" class="hover:text-gray-300 cursor-pointer">Resources</a>
+                <!-- <a routerLink="/login" class="hover:text-gray-300">Log in</a> -->
+            </div>
+
+            <!-- Main Button -->
+            <div class="hidden md:block">
+                <button routerLink="/new-wod"
+                    class="bg-white text-purple-700 hover:bg-indigo-700 px-4 py-2 rounded-md font-semibold text-sm"> Log
+                    in
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- תפריט מלמעלה למובייל -->
+<!-- <div class="md:hidden">
+                <button (click)="toggleMobile()" class="text-gray-200 hover:text-white">
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>-->
+
+<!-- תפריט במקרה של מובייל -->
+<!-- <div *ngIf="mobileOpen" class="md:hidden bg-gray-800">
+        <a routerLink="/product" class="block px-4 py-2 hover:bg-gray-700">Product</a>
+        <a routerLink="/solutions" class="block px-4 py-2 hover:bg-gray-700">Solutions</a>
+        <a routerLink="/pricing" class="block px-4 py-2 hover:bg-gray-700">Pricing</a>
+        <a routerLink="/resources" class="block px-4 py-2 hover:bg-gray-700">Resources</a>
+        <a routerLink="/login" class="block px-4 py-2 hover:bg-gray-700">Log in</a>
+        <button class="w-full text-left px-4 py-2 bg-indigo-600 hover:bg-indigo-700">Get started</button>
+    </div> -->
