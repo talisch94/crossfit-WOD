@@ -4,6 +4,8 @@ import { ConfigModule } from '@nestjs/config';
 import { WodModule } from './wod/wod.module';
 import { dataSourceOptions } from './data-source';
 import { ExerciseModule } from './exercise/exercise.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [
@@ -12,7 +14,9 @@ import { ExerciseModule } from './exercise/exercise.module';
         }),
         TypeOrmModule.forRoot(dataSourceOptions),
         WodModule,
-        ExerciseModule
+        ExerciseModule,
+        UsersModule,
+        AuthModule
     ],
 })
 export class AppModule { }
