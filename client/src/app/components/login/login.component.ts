@@ -36,7 +36,6 @@ export class LoginComponent {
                         this.store.dispatch(loginSuccess({ user: res.user }));
                         this.router.navigate(['/admin']);
                         console.log('login success!');
-                        console.log(this.store.selectSignal());
                     } else {
                         this.error = 'Login failed. Please check your credentials.';
                     }
