@@ -1,0 +1,54 @@
+<form [formGroup]="form" (ngSubmit)="register()" class="register-form">
+    <label>
+        First Name:
+        <input type="text" formControlName="firstName" />
+    </label>
+    <div *ngIf="form.controls.firstName.invalid && form.controls.firstName.touched" class="error">
+        First name is required
+    </div>
+
+    <label>
+        Last Name:
+        <input type="text" formControlName="lastName" />
+    </label>
+    <div *ngIf="form.controls.lastName.invalid && form.controls.lastName.touched" class="error">
+        Last name is required
+    </div>
+
+    <label>
+        Email:
+        <input type="email" formControlName="email" />
+    </label>
+    <div *ngIf="form.controls.email.invalid && form.controls.email.touched" class="error">
+        Valid email is required
+    </div>
+
+    <label>
+        Password:
+        <input type="password" formControlName="password" />
+    </label>
+    <div *ngIf="form.controls.password.invalid && form.controls.password.touched" class="error">
+        Password is required (min 6 chars)
+    </div>
+
+    <label>
+        Confirm Password:
+        <input type="password" formControlName="confirmPassword" />
+    </label>
+    <div *ngIf="form.controls.confirmPassword.invalid && form.controls.confirmPassword.touched" class="error">
+        Passwords must match
+    </div>
+
+    <label>
+        Role:
+        <select formControlName="role">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select>
+    </label>
+    <div *ngIf="form.controls.role.invalid && form.controls.role.touched" class="error">
+        Role is required
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Register</button>
+</form>

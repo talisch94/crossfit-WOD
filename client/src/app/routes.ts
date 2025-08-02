@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { WODFormComponent } from './components/wod-form/wod-form.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterFormComponent } from './components/registration/register-form.component';
 
 const routeConfig: Routes = [
     {
@@ -23,6 +25,17 @@ const routeConfig: Routes = [
         path: 'admin',
         component: AdminPageComponent,
         title: 'WOD List Page',
+    },
+    {
+        path: 'login',
+        component: LoginComponent,
+        title: 'Log In Page',
+    },
+    {
+        path: 'register',
+        component: RegisterFormComponent,
+        title: 'Registration Page',
     }
+
 ];
 export default routeConfig;
