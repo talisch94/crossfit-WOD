@@ -1,6 +1,8 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { UserRole } from '../../enums/user-role.enum';
 
 @Component({
 	standalone: true,
@@ -19,6 +21,7 @@ export class RegisterFormComponent {
 		role: new FormControl('user', Validators.required)
 	});
 
+	private auth = inject(AuthService);
 	isSubmitting = signal(false);
 	error = signal<string | null>(null);
 
@@ -35,11 +38,25 @@ export class RegisterFormComponent {
 			return;
 		}
 		this.isSubmitting.set(true);
-		// TODO: Call your registration service here
-		setTimeout(() => {
-			this.isSubmitting.set(false);
-			alert('Registration successful!');
-			this.form.reset();
-		}, 1000);
+		const { firstName, lastName, email, password, role } = this.form.value;
+		this.auth.register({
+			firstName: firstName ?? '',
+			lastName: lastName ?? '',
+			email: email ?? '',
+			password: password ?? '',
+			role: (role as UserRole) ?? UserRole.USER
+		})
+			.subscribe({
+				next: () => {
+					this.isSubmitting.set(false);
+					alert('Registration successful!');
+					this.form.reset();
+				},
+				error: (err) => {
+					this.isSubmitting.set(false);
+					this.error.set('Registration failed. Please try again.');
+					console.error(err);
+				}
+			});
 	}
 }

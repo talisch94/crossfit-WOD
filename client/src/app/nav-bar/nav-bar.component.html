@@ -15,12 +15,27 @@
                 <!-- <a routerLink="/login" class="hover:text-gray-300">Log in</a> -->
             </div>
 
-            <!-- Main Button -->
+            <!-- User Full Name (top right) -->
+            <div class="hidden md:block text-right mr-4" *ngIf="user()?.firstName && user()?.lastName">
+                <span class="font-semibold text-white bg-purple-700 px-3 py-1 rounded-lg shadow">{{ user()?.firstName }} {{ user()?.lastName }}</span>
+            </div>
+
+            <!-- Main Dropdown Button (Material) -->
             <div class="hidden md:block">
-                <button routerLink="/new-wod"
-                    class="bg-white text-purple-700 hover:bg-indigo-700 px-4 py-2 rounded-md font-semibold text-sm"> Log
-                    in
+                <button mat-button [matMenuTriggerFor]="accountMenu" class="bg-white text-purple-700 hover:bg-indigo-700 px-4 py-2 rounded-md font-semibold text-sm">
+                    Account
+                    <mat-icon>arrow_drop_down</mat-icon>
                 </button>
+                <mat-menu #accountMenu="matMenu">
+                    <button mat-menu-item [routerLink]="'/login'">
+                        <mat-icon>login</mat-icon>
+                        <span>Log in</span>
+                    </button>
+                    <button mat-menu-item [routerLink]="'/register'">
+                        <mat-icon>person_add</mat-icon>
+                        <span>Sign in</span>
+                    </button>
+                </mat-menu>
             </div>
         </div>
     </div>
