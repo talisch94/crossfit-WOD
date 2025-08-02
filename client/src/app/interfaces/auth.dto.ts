@@ -1,0 +1,14 @@
+import { UserRole } from "../enums/user-role.enum";
+
+export interface LoginDto {
+    email: string;
+    password: string;
+}
+
+export interface RegisterDto {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    role: UserRole;
+}
