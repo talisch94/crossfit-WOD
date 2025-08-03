@@ -1,8 +1,10 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { delay } from 'rxjs';
-import { Wod } from '../../interfaces/wod.interface';
-import { WodService } from '../../services/wods.service';
+import { WodsService } from '../../services/wods.service';
+import { Store } from '@ngrx/store';
+import { loadWods } from '../../store/wods.actions';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { selectWods, selectWodsLoading } from '../../store/wods.selector';
 
 @Component({
     standalone: true,
@@ -12,41 +14,30 @@ import { WodService } from '../../services/wods.service';
     styleUrl: './wod-list.component.scss'
 })
 export class WODListComponent implements OnInit {
-    wods = signal<Wod[]>([]);
-    isLoading = signal(true);
+    private store = inject(Store);
+    private wodsService = inject(WodsService);
+    private router = inject(Router);
 
-    constructor(private wodService: WodService, private router: Router) { }
+    wods = toSignal(this.store.select(selectWods), { initialValue: [] });
+    isLoading = toSignal(this.store.select(selectWodsLoading), { initialValue: false });
+
 
     ngOnInit(): void {
-        this.loadWODs();
+        this.store.dispatch(loadWods());
     }
 
-    loadWODs() {
-        this.wodService.getWods()
-            .pipe(delay(2000))
-            .subscribe({
-                next: (data) => {
-                    this.isLoading.set(false);
-                    this.wods.set(data);
-                },
-                error: (err) => {
-                    this.isLoading.set(false);
-                    console.error('Error loading WODs:', err);
-                }
-            });
-    }
-    
     onEdit(wodId: string) {
-        this.router.navigate([`wod/${wodId}`]); 
+        this.router.navigate([`wod/${wodId}`]);
     }
 
     onDelete(wodId: string) {
-        this.wodService.deleteWod(wodId).subscribe({
+        this.wodsService.deleteWod(wodId).subscribe({
             next: (deletedWod) => {
                 console.log('Item deleted successfully', deletedWod);
             },
             error: (err) => {
                 console.error('Error updating wod: ', err);
             }
-        })      }
+        });
+    }
 }
