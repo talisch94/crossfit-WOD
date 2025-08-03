@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class WodService {
+export class WodsService {
 
     private apiUrl = '/api/wods';
 

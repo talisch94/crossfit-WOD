@@ -1,7 +1,7 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { WodService } from '../../services/wods.service';
+import { WodsService } from '../../services/wods.service';
 import { Wod } from '../../interfaces/wod.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Exercise } from '../../interfaces/exercise.interface';
@@ -16,7 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
     styleUrl: './wod-form.component.scss'
 })
 export class WODFormComponent implements OnInit {
-    private wodService = inject(WodService);
+    private wodService = inject(WodsService);
     private exercisesService = inject(ExercisesService);
 
     private route = inject(ActivatedRoute);

@@ -5,6 +5,8 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { authReducer } from './store/auth.reducer';
+import { wodsReducer } from './store/wods.reducer';
+import { WodsEffects } from './store/wods.effects';
 
 import routeConfig from './routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -16,8 +18,8 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routeConfig),
         provideClientHydration(withEventReplay()),
         provideHttpClient(withFetch(), withInterceptorsFromDi()),
-        provideStore({ auth: authReducer }),
-        provideEffects(),
+        provideStore({ auth: authReducer, wods: wodsReducer }),
+        provideEffects([WodsEffects]),
         provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     ]
 };
